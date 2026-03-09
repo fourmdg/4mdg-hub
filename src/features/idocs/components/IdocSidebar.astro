@@ -22,17 +22,27 @@ const nodeCount = flattenTree(tree).length;
     <button class="sidebar-close" id="closeSidebar" aria-label="Fechar">✕</button>
   </div>
 
+  <div class="sidebar-actions">
+    <button class="sidebar-action-btn" id="expandAll" title="Expandir todos os nós">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12h14"/>
+      </svg>
+      <span>Expandir</span>
+    </button>
+    <button class="sidebar-action-btn" id="collapseAll" title="Recolher todos os nós">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14"/>
+      </svg>
+      <span>Recolher</span>
+    </button>
+  </div>
+
   <div class="sidebar-content">
     <div class="tree-container" id="treeContainer">
       {tree.map((node) => (
         <TreeNode node={node} level={0} />
       ))}
     </div>
-  </div>
-
-  <div class="sidebar-footer">
-    <button class="btn-expand-all" id="expandAll">Expandir tudo</button>
-    <button class="btn-collapse-all" id="collapseAll">Recolher tudo</button>
   </div>
 </aside>
 
@@ -102,29 +112,48 @@ const nodeCount = flattenTree(tree).length;
     padding: 0;
   }
 
-  .sidebar-footer {
+  .sidebar-actions {
     padding: 0.5rem 0.75rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
     display: flex;
-    gap: 6px;
-    background: rgba(0,0,0,0.2);
+    gap: 8px;
+    background: rgba(0,0,0,0.1);
   }
 
-  .sidebar-footer button {
+  .sidebar-action-btn {
     flex: 1;
-    padding: 6px 10px;
-    font-size: 0.7rem;
-    background: rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 12px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
     border: 1px solid rgba(255,255,255,0.1);
-    color: #94a3b8;
-    border-radius: 4px;
+    color: #a1a1aa;
+    border-radius: 6px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
   }
 
-  .sidebar-footer button:hover {
-    background: rgba(255,255,255,0.1);
-    color: white;
+  .sidebar-action-btn:hover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
+    border-color: rgba(59, 130, 246, 0.4);
+    color: #60a5fa;
+    transform: translateY(-1px);
+  }
+
+  .sidebar-action-btn:active {
+    transform: translateY(0);
+  }
+
+  .sidebar-action-btn svg {
+    opacity: 0.8;
+  }
+
+  .sidebar-action-btn:hover svg {
+    opacity: 1;
   }
 
   /* Mobile toggle */
